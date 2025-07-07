@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('buisness_cycles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tipe_industri_id');
+            $table->string('codeBisCyc', 10);
+            $table->string('namaBisCyc', 50);
             $table->timestamps();
         });
     }

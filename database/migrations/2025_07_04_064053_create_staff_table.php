@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
+            $table->string('nama', 50);
+            $table->string('divisi', 20);
+            $table->string('posisi', 20);
             $table->timestamps();
         });
     }

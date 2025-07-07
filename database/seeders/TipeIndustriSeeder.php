@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\TipeIndustri;
 use Illuminate\Database\Seeder;
 
 class TipeIndustriSeeder extends Seeder
@@ -12,6 +12,12 @@ class TipeIndustriSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        TipeIndustri::create([
+            'nama' => 'Finance',
+        ]);
+        
+        TipeIndustri::create([
+            'nama' => 'Insurance',
+        ]);
     }
 }

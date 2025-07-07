@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tipe_industri_id');
+            $table->string('nama', 50);
+            $table->string('code_client', 8);
             $table->timestamps();
         });
     }

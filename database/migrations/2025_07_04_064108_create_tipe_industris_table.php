@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('tipe_industris', function (Blueprint $table) {
             $table->id();
+            $table->string('nama', 20);
             $table->timestamps();
         });
     }
 
     /**
+     * 
      * Reverse the migrations.
      */
     public function down(): void

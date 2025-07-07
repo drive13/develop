@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('co__acts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('co_obj_id');
+            $table->string('codeCA', 10);
+            $table->text('control_act');
             $table->timestamps();
         });
     }

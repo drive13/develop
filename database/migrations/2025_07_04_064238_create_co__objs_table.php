@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('co__objs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('bis_cyc_id');
+            $table->string('codeCO', 10);
+            $table->text('control_obj');
+            $table->string('asersi1', 20);
+            $table->string('asersi2', 20)->nullable();
+            $table->string('asersi3', 20)->nullable();
+            $table->string('asersi4', 20)->nullable();
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

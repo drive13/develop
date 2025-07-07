@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('risks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('co_act_id');
+            $table->text('risk');
             $table->timestamps();
         });
     }
