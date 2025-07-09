@@ -8,6 +8,7 @@ class BuisnessCycle extends Model
 {
     protected $fillable = [
         'tipe_industri_id',
+        'codeBisCyc',
         'namaBisCyc',
     ];
 
