@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Risk;
 use Illuminate\Http\Request;
 
 class RiskController extends Controller
@@ -25,9 +26,20 @@ class RiskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        //
+        $request->merge(['co_act_id' => $id]);
+        // dd($request->all());
+        $request->validate([
+            'co_act_id' => 'required|integer',
+            'risk' => 'required|string',
+        ]);
+
+        Risk::create([
+            'co_act_id' => $request->co_act_id,
+            'risk' => $request->risk,
+        ]);
+        return redirect()->back()->with('success', 'Risiko berhasil ditambahkan!');
     }
 
     /**

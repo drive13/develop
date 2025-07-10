@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BuisnessCycle;
+use App\Models\Co_Act;
+use App\Models\Co_Obj;
 use Illuminate\Http\Request;
 
 class Co_actController extends Controller
@@ -25,9 +28,25 @@ class Co_actController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        //
+        // $parent = Co_Obj::with('bisCyc')->where('id', $id)->get();
+        // $bc = BuisnessCycle::find($id);
+        // dd($request, $id);
+        $request->merge(['co_obj_id' => $id]);
+        // dd($request->all());
+        $request->validate([
+            'co_obj_id' => 'required|integer',
+            'codeCA' => 'required|string|max:10',
+            'controlact' => 'required|string',
+        ]);
+
+        Co_Act::create([
+            'co_obj_id' => $request->co_obj_id,
+            'codeCA' => $request->codeCA,
+            'control_act' => $request->controlact,
+        ]);
+        return redirect()->back()->with('success', 'Control Activity berhasil ditambahkan!');
     }
 
     /**
