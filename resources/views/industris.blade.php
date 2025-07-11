@@ -24,7 +24,7 @@
                             </th>
                         </tr>
                     </thead>
-                        @foreach ($ti as $tipe)
+                        @foreach ($tis as $tipe)
                             <tr>
                                 <th>{{$loop->iteration}}</th>
                                 <th><a href="/bis-cyc/{{$tipe->id}}">{{$tipe->nama}}</a></th>

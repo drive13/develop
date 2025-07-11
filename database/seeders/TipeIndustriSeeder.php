@@ -13,11 +13,9 @@ class TipeIndustriSeeder extends Seeder
     public function run(): void
     {
         TipeIndustri::create([
-            'nama' => 'Finance',
+            'kodeIndustri' => 'GCMan',
+            'nama' => 'Manufaktur',
         ]);
         
-        TipeIndustri::create([
-            'nama' => 'Insurance',
-        ]);
     }
 }

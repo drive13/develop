@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('risks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('co_act_id');
+            $table->string('kodeCA', 20);
+            $table->foreign('kodeCA')->references('kodeCA')->on('co__acts');
             $table->text('risk');
             $table->timestamps();
         });

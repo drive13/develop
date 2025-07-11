@@ -14,28 +14,14 @@ class RiskSeeder extends Seeder
     public function run(): void
     {
         Risk::create([
-            'co_act_id' => 1,
-            'risk' => 'risk dari ca expense EX104',
+            'kodeCA' => 'EX112',
+            'risk' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quae excepturi distinctio quia voluptate provident officiis ipsum? Voluptatum numquam qui mollitia quae exercitationem, corrupti dolores perspiciatis minus commodi non natus?',
         ]);
         
         Risk::create([
-            'co_act_id' => 2,
-            'risk' => 'risk dari ca expense EX107',
-        ]);
-        
-        Risk::create([
-            'co_act_id' => 3,
-            'risk' => 'risk dari ca expense EX151',
-        ]);
-        
-        Risk::create([
-            'co_act_id' => 4,
-            'risk' => 'risk dari ca premium PM105',
-        ]);
-        
-        Risk::create([
-            'co_act_id' => 5,
-            'risk' => 'risk dari ca premium PM110',
+            'kodeCA' => 'EX213',
+            'risk' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quae excepturi distinctio quia voluptate provident officiis ipsum? Voluptatum numquam qui mollitia quae exercitationem, corrupti dolores perspiciatis minus commodi non natus?',
         ]);
     }
 }
+

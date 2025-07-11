@@ -13,93 +13,39 @@ class CoObjSeeder extends Seeder
     public function run(): void
     {
         Co_Obj::create([
-            'bis_cyc_id' => 1,
-            'codeCO' => 'FINEXP01',
-            'control_obj' => 'Amounts posted to payables represent goods or services received.',
-            'asersi1' => 'Validity',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
+            'kodeBisCyc' => 'EX10',
+            'kodeCO' => 'EX1015',
+            'control_obj' => 'Purchase orders are placed only for approved requisitions.',
+            'description' => 'Purchase requisitions are normally used only if an independent purchasing function has been established.  A purchasing function procures goods and services to fulfill the organization’s requirements, as approved by management.  The purchasing function should not acquire goods or services for which purchase requisitions have not been approved by management.  Purchase requisitions might be paper-based or entered on-line, or they might originate from an inventory management system.',
+        ]);
+
+        Co_Obj::create([
+            'kodeBisCyc' => 'EX10',
+            'kodeCO' => 'EX1025',
+            'control_obj' => 'Purchase orders are entered accurately.',
+            'description' => 'Inaccurate input of purchase orders could lead to financial losses due to incorrect goods or services being purchased.',
         ]);
         
         Co_Obj::create([
-            'bis_cyc_id' => 1,
-            'codeCO' => 'FINEXP02',
-            'control_obj' => 'Payable amounts are accurately calculated and recorded.',
-            'asersi1' => 'Recording',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
+            'kodeBisCyc' => 'EX10',
+            'kodeCO' => 'EX1035',
+            'control_obj' => 'All purchase orders issued are input and processed.',
+            'description' => 'If purchase order entry or processing is incomplete, receipts of goods and/or processing of invoices might be hampered.  Warehouse employees are normally instructed only to accept goods for which purchase orders have been issued, and only up to the quantity specified in each purchase order.  In invoice processing, the invoice is normally matched with the purchase order to verify the price and the payment terms.',
+        ]);
+
+        Co_Obj::create([
+            'kodeBisCyc' => 'PM10',
+            'kodeCO' => 'PM1005',
+            'control_obj' => 'Only enter into policies which have an acceptable level of risk',
+            'description' =>'-',
         ]);
         
         Co_Obj::create([
-            'bis_cyc_id' => 1,
-            'codeCO' => 'FINEXP02',
-            'control_obj' => 'Payable amounts are accurately calculated and recorded.',
-            'asersi1' => 'Recording',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
+            'kodeBisCyc' => 'PM10',
+            'kodeCO' => 'PM1010',
+            'control_obj' => 'Denied applications are returned to the applicant along with any deposit premium',
+            'description' =>'-',
         ]);
         
-        Co_Obj::create([
-            'bis_cyc_id' => 2,
-            'codeCO' => 'FINBOR01',
-            'control_obj' => 'Recorded debt represents a valid liability of the organization.',
-            'asersi1' => 'Validity',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
-        ]);
-        
-        Co_Obj::create([
-            'bis_cyc_id' => 2,
-            'codeCO' => 'FINBOR02',
-            'control_obj' => 'Borrowings are recorded accurately as to amounts and terms.',
-            'asersi1' => 'Recording',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
-        ]);
-        
-        Co_Obj::create([
-            'bis_cyc_id' => 3,
-            'codeCO' => 'FINFA01',
-            'control_obj' => 'Recorded fixed asset acquisitions represent fixed assets acquired by the organization.',
-            'asersi1' => 'Validity',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
-        ]);
-        
-        Co_Obj::create([
-            'bis_cyc_id' => 4,
-            'codeCO' => 'FINTRES01',
-            'control_obj' => 'Recorded investments represent assets of the organization.',
-            'asersi1' => 'Validity',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
-        ]);
-        
-        Co_Obj::create([
-            'bis_cyc_id' => 5,
-            'codeCO' => 'INSEXP01',
-            'control_obj' => 'Amounts posted to payables represent goods or services received.',
-            'asersi1' => 'Validity',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
-        ]);
-        
-        Co_Obj::create([
-            'bis_cyc_id' => 6,
-            'codeCO' => 'INSPRE01',
-            'control_obj' => 'Only enter into policies lines of business which have an acceptable level of risk',
-            'asersi1' => 'Validity',
-            'asersi2' => Null,
-            'asersi3' => Null,
-            'asersi4' => Null,
-        ]);
     }
 }

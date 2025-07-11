@@ -12,10 +12,10 @@ class TipeIndustriController extends Controller
      */
     public function index()
     {
-        $ti = TipeIndustri::all();
-
+        $tis = TipeIndustri::with('bisCycs.co_objs.co_acts')->get();
+        // dd($tis);
         return view('industris', [
-            'ti' => $ti,
+            'tis' => $tis,
         ]);
     }
 

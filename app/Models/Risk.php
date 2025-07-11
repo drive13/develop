@@ -8,13 +8,13 @@ class Risk extends Model
 {
 
     protected $fillable = [
-        'co_act_id',
+        'kodeCA',
         'risk',
     ];
 
     public function co_act()
     {
-        return $this->belongsTo(Co_Act::class, 'co_act_id', 'id');
+        return $this->belongsTo(Co_Act::class, 'kodeCA', 'id');
     }
 
 }

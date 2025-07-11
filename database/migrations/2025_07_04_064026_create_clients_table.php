@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tipe_industri_id');
+            $table->string('kodeIndustri', 20);
+            // $table->foreign('kodeIndustri')->references('kodeIndustri')->on('tipe_industris');
+            $table->string('code_client', 15);
             $table->string('nama', 50);
-            $table->string('code_client', 8);
+            $table->text('alamat');
+            $table->string('initial_year', 4);
+            $table->string('current_year', 4);
             $table->timestamps();
         });
     }

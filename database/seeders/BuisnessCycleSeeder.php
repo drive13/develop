@@ -14,41 +14,19 @@ class BuisnessCycleSeeder extends Seeder
     
     public function run(): void
     {
+        
         BuisnessCycle::create([
-            'tipe_industri_id' => 1,
-            'codeBisCyc' => 'FinExp',
-            'namaBisCyc' => 'Expense',
+            'kodeIndustri' => 'GCMan',
+            'kodeBisCyc' => 'EX10',
+            'namaBisCyc' => 'Expenditure',
         ]);
         
         BuisnessCycle::create([
-            'tipe_industri_id' => 1,
-            'codeBisCyc' => 'FinBor',
-            'namaBisCyc' => 'Borrowing',
-        ]);
-        
-        BuisnessCycle::create([
-            'tipe_industri_id' => 1,
-            'codeBisCyc' => 'FinFA',
-            'namaBisCyc' => 'Fixed Asset',
-        ]);
-        
-        BuisnessCycle::create([
-            'tipe_industri_id' => 1,
-            'codeBisCyc' => 'FinTres',
-            'namaBisCyc' => 'Fixed Asset',
-        ]);
-        
-        BuisnessCycle::create([
-            'tipe_industri_id' => 2,
-            'codeBisCyc' => 'InsExp',
-            'namaBisCyc' => 'Expense',
-        ]);
-        
-        BuisnessCycle::create([
-            'tipe_industri_id' => 2,
-            'codeBisCyc' => 'InsPre',
+            'kodeIndustri' => 'GCMan',
+            'kodeBisCyc' => 'PM10',
             'namaBisCyc' => 'Premium',
         ]);
         
+
     }
 }

@@ -13,15 +13,21 @@ class ClientSeeder extends Seeder
     public function run(): void
     {
         Client::create([
-            'tipe_industri_id' => 1,
-            'nama' => 'PT Berau Coal Energy Tbk',
+            'kodeIndustri' => 'GCMan',
             'code_client' => 'BRC001',
+            'nama' => 'PT Berau Coal Energy Tbk',
+            'alamat' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, reiciendis.',
+            'initial_year' => '2024',
+            'current_year' => '2024',
         ]);
         
         Client::create([
-            'tipe_industri_id' => 2,
+            'kodeIndustri' => 'GCMan',
+            'code_client' => 'GEMS001',
             'nama' => 'PT Golden Energy Mines Tbk',
-            'code_client' => 'GEM002',
+            'alamat' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, reiciendis.',
+            'initial_year' => '2024',
+            'current_year' => '2024',
         ]);
     }
 }

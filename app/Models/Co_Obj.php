@@ -8,22 +8,19 @@ class Co_Obj extends Model
 {
 
     protected $fillable = [
-        'bis_cyc_id',
-        'codeCO',
+        'kodeBisCyc',
+        'kodeCO',
         'control_obj',
-        'asersi1',
-        'asersi2',
-        'asersi3',
-        'asersi4',
+        'description',
     ];
 
     public function bisCyc()
     {
-        return $this->belongsTo(BuisnessCycle::class, 'bis_cyc_id', 'id');
+        return $this->belongsTo(BuisnessCycle::class, 'kodeBisCyc', 'kodeBisCyc');
     }
 
     public function co_acts()
     {
-        return $this->hasMany(Co_Act::class, 'co_obj_id', 'id');
+        return $this->hasMany(Co_Act::class, 'kodeCO', 'kodeCO');
     }
 }

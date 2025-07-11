@@ -13,12 +13,13 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            BuisnessCycleSeeder::class,
-            ClientSeeder::class,
-            CoActSeeder::class,
-            CoObjSeeder::class,
-            RiskSeeder::class,
             TipeIndustriSeeder::class,
+            BuisnessCycleSeeder::class,
+            CoObjSeeder::class,
+            RelatedAccountSeeder::class,
+            CoActSeeder::class,
+            RiskSeeder::class,
+            ClientSeeder::class,
         ]);
         // User::factory(10)->create();
 

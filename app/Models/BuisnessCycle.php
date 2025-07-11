@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class BuisnessCycle extends Model
 {
     protected $fillable = [
-        'tipe_industri_id',
-        'codeBisCyc',
+        'kodeIndustri',
+        'kodeBisCyc',
         'namaBisCyc',
     ];
 
     public function tipeIndustri()
     {
-        return $this->belongsTo(TipeIndustri::class, 'tipe_industri_id', 'id');
+        return $this->belongsTo(TipeIndustri::class, 'kodeIndustri', 'kodeIndustri');
     }
 
     public function co_objs()
     {
-        return $this->hasMany(Co_Obj::class, 'bis_cyc_id', 'id');
+        return $this->hasMany(Co_Obj::class, 'kodeCO', 'kodeCO');
     }
 }

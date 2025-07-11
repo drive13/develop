@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('co__objs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bis_cyc_id');
-            $table->string('codeCO', 10);
+            $table->string('kodeBisCyc', 20);
+            $table->foreign('kodeBisCyc')->references('kodeBisCyc')->on('buisness_cycles');
+            $table->string('kodeCO', 20)->unique();
             $table->text('control_obj');
-            $table->string('asersi1', 20);
-            $table->string('asersi2', 20)->nullable();
-            $table->string('asersi3', 20)->nullable();
-            $table->string('asersi4', 20)->nullable();
+            $table->text('description');
             $table->timestamps();
         }); 
     }

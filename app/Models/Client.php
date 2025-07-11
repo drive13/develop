@@ -8,14 +8,17 @@ class Client extends Model
 {
 
     protected $fillable = [
-        'tipe_industri_id',
-        'nama',
+        'kodeIndustri',
         'code_client',
+        'nama',
+        'alamat',
+        'initial_year',
+        'current_year',
     ];
 
     public function tipeIndustri()
     {
-        return $this->belongsTo(TipeIndustri::class, 'tipe_industri_id', 'id');
+        return $this->belongsTo(TipeIndustri::class, 'kodeIndustri', 'kodeIndustri');
     }
 
     /**

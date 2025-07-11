@@ -8,16 +8,17 @@ class TipeIndustri extends Model
 {
 
     protected $fillable = [
-        'nama'
+        'nama',
+        'kodeIndustri',
     ];
 
     public function bisCycs()
     {
-        return $this->hasMany(BuisnessCycle::class, 'tipe_industri_id', 'id');
+        return $this->hasMany(BuisnessCycle::class, 'kodeIndustri', 'kodeIndustri');
     }
 
     public function clients()
     {
-        return $this->hasMany(Client::class, 'tipe_industri_id', 'id');
+        return $this->hasMany(Client::class, 'kodeIndustri', 'kodeIndustri');
     }
 }

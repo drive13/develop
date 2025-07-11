@@ -18,7 +18,7 @@ Route::get('/tes', function () {
     return view('backhome');
 });
 
-Route::get('/industris', [TipeIndustriController::class, 'index']);
+Route::get('/controls', [TipeIndustriController::class, 'index']);
 Route::post('/industri/store', [TipeIndustriController::class, 'store']);
 
 Route::get('/bis-cyc/{id}', [BisCycController::class, 'index']);
@@ -35,7 +35,5 @@ Route::get('/tes/biscyc', function(){
             'bisCycs.co_objs.co_acts.risks'
             )
             ->where('id',1 )->get();
-
     dd($tes);
-    
 });

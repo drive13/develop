@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('co__acts', function (Blueprint $table) {
+        Schema::create('related_accounts', function (Blueprint $table) {
             $table->id();
             $table->string('kodeCO', 20);
-            $table->foreign('kodeCO')->references('kodeCO')->on('co__objs');
-            $table->string('kodeCA', 20)->unique();
-            $table->text('control_act');
-            $table->text('description');
-            $table->text('test_of_control');
+            $table->string('nama_akun', 30);
+            $table->string('asersi', 15);
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('co__acts');
+        Schema::dropIfExists('related_accounts');
     }
 };
