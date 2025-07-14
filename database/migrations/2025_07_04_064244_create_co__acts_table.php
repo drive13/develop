@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('control_act');
             $table->text('description');
             $table->text('test_of_control');
+            $table->string('nature', 30);
             $table->timestamps();
         });
     }

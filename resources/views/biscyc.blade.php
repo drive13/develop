@@ -10,7 +10,7 @@
     </ul>
   </div>
 @endif
-{{-- @dd($bc) --}}
+{{-- @dd($ti) --}}
 <div class="row">
   <!-- DOM/Jquery table start -->
   <div class="col-sm-12">
@@ -18,21 +18,21 @@
       <div class="card-header py-2">
         <div class="row d-flex align-items-center">
           <div class="col-6">
-            <h5>Tipe Industri : {{$bc[0]->nama}}</h5>
+            <h5>Tipe Industri : {{$ti[0]->nama}}</h5>
           </div>
           <div class="col-6 text-end">
-            <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalBisCyc" data-tipeIndustri="{{$bc[0]->id}}" onclick="modalFormAddBisCyc(this)"><i data-feather="plus"></i>Tambah Buis Cycle</a>
+            <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalBisCyc" data-tipeIndustri="{{$ti[0]->kodeIndustri}}" onclick="modalFormAddBisCyc(this)"><i data-feather="plus"></i>Tambah Buis Cycle</a>
           </div>
         </div>
       </div>
       <div class="card-body p-0 border border-0">
         {{-- Accordion Bis Cyc --}}
         <div class="accordion" id="accordionIndustri">
-          @foreach ($bc[0]->bisCycs as $biscyc)
+          @foreach ($ti[0]->bisCycs as $biscyc)
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingBisCyc{{ $biscyc->id }}">
                 <button class="accordion-button collapsed fw-bold py-2 ps-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBisCyc{{ $biscyc->id }}">
-                  Business Cycle: {{ $biscyc->namaBisCyc }}
+                  Business Cycle: {{ $biscyc->kodeBisCyc }}
                 </button>
               </h2>
               <div id="collapseBisCyc{{ $biscyc->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionIndustri">
@@ -42,11 +42,11 @@
                     <div class="col-6">
                       <div class="py-2 ps-3">
                         <strong>Business Cycle:</strong>
-                        <p class="mb-0">{{$biscyc->codeBisCyc}} - {{ $biscyc->namaBisCyc }}</p>
+                        <p class="mb-0">{{$biscyc->kodeBisCyc}} - {{ $biscyc->namaBisCyc }}</p>
                       </div>
                     </div>
                     <div class="col-6 text-end">
-                      <button type="button" class="btn btn-sm btn-outline-primary me-2" data-id-cycle="{{$biscyc->id}}" data-bs-toggle="modal" data-bs-target="#modalCO" onclick="modalAddCO(this)"><i data-feather="plus"></i> Tambah CO</button>
+                      <button type="button" class="btn btn-sm btn-outline-primary me-2" data-id-cycle="{{$biscyc->kodeBisCyc}}" data-bs-toggle="modal" data-bs-target="#modalCO" onclick="modalAddCO(this)"><i data-feather="plus"></i> Tambah CO</button>
                     </div>
                   </div>
                   <!-- Nested Accordion: CO Objs -->
@@ -55,7 +55,7 @@
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="headingCoObj{{ $co_obj->id }}">
                           <button class="accordion-button collapsed fw-bold ps-4 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCoObj{{ $co_obj->id }}">
-                            Control Objective: {{ $co_obj->codeCO }}
+                            Control Objective: {{ $co_obj->kodeCO }}
                           </button>
                         </h2>
                         <div id="collapseCoObj{{ $co_obj->id }}" class="accordion-collapse collapse" data-bs-parent="#collapseCoObj">
@@ -68,20 +68,29 @@
   
                                   <!-- Asersi -->
                                   <div class="mt-3">
-                                    <strong>Asersi:</strong>
-                                    <ul class="mb-0">
-                                      @for ($i = 1; $i <= 3; $i++)
-                                        @php $asersi = 'asersi' . $i; @endphp
-                                        @if (!is_null($co_obj->$asersi))
-                                          <li>{{ $co_obj->$asersi }}</li>
-                                        @endif
-                                      @endfor
-                                    </ul>
+                                    <strong>Related Accounts:</strong>
+                                    <table class="table table-borderless table-sm">
+                                      <thead>
+                                        <tr>
+                                          <th>Akun</th>
+                                          <th>Asersi</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        @foreach ($co_obj->re_accounts as $acc)
+                                          <tr>
+                                            <td>{{$acc->nama_akun}}</td>
+                                            <td>{{$acc->asersi}}</td>
+                                          </tr>
+                                        @endforeach
+                                      </tbody>
+                                    </table>
                                   </div>
                                 </div>
                               </div>
                               <div class="col-6 text-end">
-                                <button type="button" class="btn btn-sm btn-outline-primary me-2" data-id-co="{{$co_obj->id}}" data-bs-toggle="modal" data-bs-target="#modalCA" onclick="modalAddCA(this)"><i data-feather="plus"></i> Tambah CA</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary me-2" data-id-co="{{$co_obj->kodeCO}}" data-bs-toggle="modal" data-bs-target="#modalCA" onclick="modalAddCA(this)"><i data-feather="plus"></i> Tambah CA</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary me-2" data-id-co="{{$co_obj->kodeCO}}" data-bs-toggle="modal" data-bs-target="#modalRA" onclick="modalAddRA(this)"><i data-feather="plus"></i> Tambah Related Account</button>
                               </div>
                             </div>
 
@@ -91,20 +100,31 @@
                                 <div class="accordion-item">
                                   <h2 class="accordion-header" id="headingCoAct{{ $co_act->id }}">
                                     <button class="accordion-button collapsed fw-bold ps-5 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCoAct{{ $co_act->id }}">
-                                      Control Activity: {{ $co_act->codeCA }}
+                                      Control Activity: {{ $co_act->kodeCA }} &nbsp;<span class="fst-italic">({{$co_act->nature}})</span>
                                     </button>
                                   </h2>
                                   <div id="collapseCoAct{{ $co_act->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionCoActs">
                                     <div class="accordion-body border-bottom-0 px-0">
                                       <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-9">
                                           <div class="mb-3 ps-5">
                                             <strong>Control Activity:</strong>
                                             <p class="mb-0">{{ $co_act->control_act }}</p>
                                           </div>
+                                          
+                                          <div class="mb-3 ps-5">
+                                            <strong>Deskripsi:</strong>
+                                            <p class="mb-0">{{ $co_act->description }}</p>
+                                          </div>
+                                          
+                                          <div class="mb-3 ps-5">
+                                            <strong>Test of Control:</strong>
+                                            <p class="mb-0">{{ $co_act->test_of_control }}</p>
+                                          </div>
                                         </div>
-                                        <div class="col-6 text-end">
-                                          <button type="button" class="btn btn-sm btn-outline-primary me-2" data-id-ca="{{$co_act->id}}" data-bs-toggle="modal" data-bs-target="#modalRisk" onclick="modalAddRisk(this)"><i data-feather="plus"></i> Tambah Risk</button>
+                                        <div class="col-3 text-end">
+                                          <button type="button" class="btn btn-sm btn-outline-primary me-2" data-id-ca="{{$co_act->kodeCA}}" data-bs-toggle="modal" data-bs-target="#modalRisk" onclick="modalAddRisk(this)"><i data-feather="plus"></i> Tambah Risk</button>
+                                          
                                         </div>
                                         <div class="col-12">
                                           <div class="ps-5">
@@ -173,14 +193,13 @@
         <form id="formModalTambahBisCyc" action="#" method="POST">
             @csrf
             <div class="mb-3">
+              <div class="mb-3">
+                  <label for="kodeBisCyc" class="form-label">Code Buisness Cycle <span class="text-danger fw-bold">*</span></label>
+                  <input type="input" name="kodeBisCyc" class="form-control" id="kodeBisCyc" required>
+              </div>
                 <label for="namaBisCyc" class="form-label">Buisness Cycle <span class="text-danger fw-bold">*</span></label>
                 <input type="input" name="namaBisCyc" class="form-control" id="namaBisCyc" required>
             </div>
-            <div class="mb-3">
-                <label for="codeBisCyc" class="form-label">Code Buisness Cycle <span class="text-danger fw-bold">*</span></label>
-                <input type="input" name="codeBisCyc" class="form-control" id="codeBisCyc" required>
-            </div>
-            <input type="hidden" name="tipe_industri_id" id="input-ti" value="#" required>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
@@ -200,14 +219,18 @@
         <form id="formModalTambahCO" action="#" method="POST">
             @csrf
             <div class="mb-3">
-                <label for="codeco" class="form-label">CodeCO <span class="text-danger fw-bold">*</span></label>
-                <input type="input" name="codeco" class="form-control" id="codeco" required>
+                <label for="kodeco" class="form-label">Kode CO <span class="text-danger fw-bold">*</span></label>
+                <input type="input" name="kodeco" class="form-control" id="kodeco" required>
             </div>
             <div class="mb-3">
                 <label for="controlobj" class="form-label">Control Objective <span class="text-danger fw-bold">*</span></label>
-                <textarea name="controlobj" id="controlobj" cols="10" rows="10" class="form-control" required></textarea>
+                <textarea name="controlobj" id="controlobj" cols="5" rows="5" class="form-control" required></textarea>
             </div>
-            <div class="row">
+            <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi CO <span class="text-danger fw-bold">*</span></label>
+                <textarea name="description" id="description" cols="5" rows="5" class="form-control" required></textarea>
+            </div>
+            {{-- <div class="row">
               <div class="col-3">
                 <div class="mb-3">
                   <label for="asersi1">Asersi 1 <span class="text-danger fw-bold">*</span></label>
@@ -264,7 +287,7 @@
                   </select>
                 </div>
               </div>
-            </div>
+            </div> --}}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
@@ -273,7 +296,7 @@
 </div>
 
 {{-- Modal CA --}}
-<div class="modal fade" id="modalCA" tabindex="-1" aria-labelledby="labelModalCA" aria-hidden="true">
+<div class="modal modal-lg fade" id="modalCA" tabindex="-1" aria-labelledby="labelModalCA" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -284,12 +307,33 @@
         <form id="formModalTambahCA" action="#" method="POST">
             @csrf
             <div class="mb-3">
-                <label for="codeCA" class="form-label">Code CA <span class="text-danger fw-bold">*</span></label>
-                <input type="input" name="codeCA" class="form-control" id="codeCA" required>
+                <label for="kodeCA" class="form-label">Kode CA <span class="text-danger fw-bold">*</span></label>
+                <input type="input" name="kodeCA" class="form-control" id="kodeCA" required>
             </div>
             <div class="mb-3">
-                <label for="controlact" class="form-label">Control Activity <span class="text-danger fw-bold">*</span></label>
-                <textarea name="controlact" id="controlact" cols="10" rows="10" class="form-control" required></textarea>
+                <label for="control_act" class="form-label">Control Activity <span class="text-danger fw-bold">*</span></label>
+                <textarea name="control_act" id="control_act" cols="5" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description <span class="text-danger fw-bold">*</span></label>
+                <textarea name="description" id="description" cols="5" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="test_of_control" class="form-label">Test of Control <span class="text-danger fw-bold">*</span></label>
+                <textarea name="test_of_control" id="test_of_control" cols="5" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label d-block">Nature <span class="text-danger fw-bold">*</span></label>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" value="Key Audit" type="radio" name="nature" id="natureKey" required>
+                <label class="form-check-label" for="natureKey">Key Audit</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" value="Value Added" type="radio" name="nature" id="natureValue" required>
+                <label class="form-check-label" for="natureValue">Value Added</label>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -311,7 +355,33 @@
             @csrf
             <div class="mb-3">
                 <label for="risk" class="form-label">Risk<span class="text-danger fw-bold">*</span></label>
-                <textarea name="risk" id="risk" cols="10" rows="10" class="form-control" required></textarea>
+                <textarea name="risk" id="risk" cols="5" rows="5" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- Related Account --}}
+<div class="modal modal-sm fade" id="modalRA" tabindex="-1" aria-labelledby="labelModalRA" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="labelModalRA">Tambah Related Account</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formModalTambahRA" action="#" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="nama_akun" class="form-label">Nama Akun <span class="text-danger fw-bold">*</span></label>
+                <input type="input" name="nama_akun" class="form-control" id="nama_akun" required>
+            </div>
+            <div class="mb-3">
+                <label for="asersi" class="form-label">Asersi <span class="text-danger fw-bold">*</span></label>
+                <input type="input" name="asersi" class="form-control" id="asersi" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -326,8 +396,7 @@
       function modalFormAddBisCyc(element){
         var tipeIndustri = element.getAttribute('data-tipeIndustri');
         // alert(tipeIndustri);
-        document.getElementById('formModalTambahBisCyc').action = '/bis-cyc/' + tipeIndustri;
-        document.getElementById('input-ti').value = tipeIndustri;
+        document.getElementById('formModalTambahBisCyc').action = '/controls/' + tipeIndustri;
         // console.log(tipeIndustri);
       }
 
@@ -350,6 +419,13 @@
         document.getElementById('formModalTambahRisk').action = '/risk/' + ca_id;
         
       }
+      
+      function modalAddRA(element){
+        var co_id = element.getAttribute('data-id-co');
+        
+        document.getElementById('formModalTambahRA').action = '/reaccount/' + co_id;
+        
+      }
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -364,3 +440,4 @@
         </script>
     @endif
 @endpush
+

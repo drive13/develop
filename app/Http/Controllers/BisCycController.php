@@ -11,22 +11,23 @@ class BisCycController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index($id) //nampilin halaman controls tiap tipe industri
     {
         // $bc = BuisnessCycle::with(
         //     'tipeIndustri',
         //     'co_objs.co_acts.risks'
         //     )
         //     ->where('id', $id)->get();
-        $bc = TipeIndustri::with(
-            'bisCycs.co_objs.co_acts.risks'
+        $ti = TipeIndustri::with(
+            'bisCycs.co_objs.co_acts.risks',
+            'bisCycs.co_objs.re_accounts'
             )
             ->where('id', $id)->get();
         
-        // dd($bc);
+        // dd($ti);
         
         return view('biscyc', [
-            'bc' => $bc,
+            'ti' => $ti,
         ]);
     }
 
@@ -41,22 +42,24 @@ class BisCycController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
         // dd($request);
+        $request->merge(['kodeIndustri' => $id]);
+        // dd($request);
         $request->validate([
-            'tipe_industri_id' => 'required|string',
+            'kodeIndustri' => 'required|string',
             'namaBisCyc' => 'required|string|max:20',
-            'codeBisCyc' => 'required|string|max:10',
+            'kodeBisCyc' => 'required|string|max:10',
         ]);
         
         BuisnessCycle::create([
-            'tipe_industri_id' => $request->tipe_industri_id,
+            'kodeIndustri' => $request->kodeIndustri,
             'namaBisCyc' => $request->namaBisCyc,
-            'codeBisCyc' => $request->codeBisCyc,
+            'kodeBisCyc' => $request->kodeBisCyc,
         ]);
 
-        return redirect()->back()->with('success', 'Buissness Cycle Telah Ditambahkan!');
+        return redirect()->back()->with('success', 'Buissness Cycle '. $request->namaBisCyc .' Telah Ditambahkan!');
 
     }
 

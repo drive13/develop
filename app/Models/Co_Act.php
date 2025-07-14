@@ -13,6 +13,7 @@ class Co_Act extends Model
         'control_act',
         'description',
         'test_of_control',
+        'nature',
     ];
 
     public function co_obj()

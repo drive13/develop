@@ -30,30 +30,24 @@ class Co_ObjController extends Controller
     public function store(Request $request, string $id)
     {
 
-        $bc = BuisnessCycle::find($id);
-        $request->merge(['bis_cyc_id' => $id]);
-        
+        $bc = BuisnessCycle::where('kodeBisCyc', $id)->get();
+        $request->merge(['kodeBisCyc' => $id]);
+        // dd($request, $bc);
         $request->validate([
-            'bis_cyc_id' => 'required|integer',
-            'codeco' => 'required|string|max:10',
+            'kodeBisCyc' => 'required|string|max:20',
+            'kodeco' => 'required|string|max:20',
             'controlobj' => 'required|string',
-            'asersi1' => 'required|string|max:20',
-            'asersi2' => 'string|max:20',
-            'asersi3' => 'string|max:20',
-            'asersi4' => 'string|max:20',
+            'description' => 'required|string',
         ]);
 
         Co_Obj::create([
-            'bis_cyc_id' => $request->bis_cyc_id,
-            'codeCO' => $request->codeco,
+            'kodeBisCyc' => $request->kodeBisCyc,
+            'kodeCO' => $request->kodeco,
             'control_obj' => $request->controlobj,
-            'asersi1' => $request->asersi1,
-            'asersi2' => $request->asersi2,
-            'asersi3' => $request->asersi3,
-            'asersi4' => $request->asersi4,
+            'description' => $request->description,
         ]);
 
-        return redirect()->back()->with('success', 'Control Objective pada Cycle '. $bc->namaBisCyc .' berhasil ditambahkan!');
+        return redirect()->back()->with('success', 'Control Objective pada Cycle '. $bc[0]->namaBisCyc .' berhasil ditambahkan!');
     }
 
     /**

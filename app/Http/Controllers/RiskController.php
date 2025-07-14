@@ -28,15 +28,15 @@ class RiskController extends Controller
      */
     public function store(Request $request, string $id)
     {
-        $request->merge(['co_act_id' => $id]);
+        $request->merge(['kodeCA' => $id]);
         // dd($request->all());
         $request->validate([
-            'co_act_id' => 'required|integer',
+            'kodeCA' => 'required|string',
             'risk' => 'required|string',
         ]);
 
         Risk::create([
-            'co_act_id' => $request->co_act_id,
+            'kodeCA' => $request->kodeCA,
             'risk' => $request->risk,
         ]);
         return redirect()->back()->with('success', 'Risiko berhasil ditambahkan!');

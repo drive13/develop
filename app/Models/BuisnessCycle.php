@@ -19,6 +19,6 @@ class BuisnessCycle extends Model
 
     public function co_objs()
     {
-        return $this->hasMany(Co_Obj::class, 'kodeCO', 'kodeCO');
+        return $this->hasMany(Co_Obj::class, 'kodeBisCyc', 'kodeBisCyc');
     }
 }

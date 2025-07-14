@@ -23,4 +23,9 @@ class Co_Obj extends Model
     {
         return $this->hasMany(Co_Act::class, 'kodeCO', 'kodeCO');
     }
+
+    public function re_accounts()
+    {
+        return $this->hasMany(RelatedAccount::class, 'kodeCO', 'kodeCO');
+    }
 }

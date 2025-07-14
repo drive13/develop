@@ -34,12 +34,14 @@ class TipeIndustriController extends Controller
     {
         // Validasi input
         $request->validate([
-            'nama' => 'required|string|max:20'
+            'nama' => 'required|string|max:20',
+            'kodeIndustri' => 'required|string|max:20',
         ]);
 
         // Simpan ke database
         TipeIndustri::create([
-            'nama' => $request->nama
+            'nama' => $request->nama,
+            'kodeIndustri' => $request->kodeIndustri,
         ]);
 
         // Redirect atau kembali dengan pesan sukses
