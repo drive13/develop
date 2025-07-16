@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('related_accounts', function (Blueprint $table) {
+        Schema::create('leadsheets', function (Blueprint $table) {
             $table->id();
+            $table->string('kodeLeadsheet', 50)->unique();
+            $table->string('kodeBisCyc', 20);
             $table->string('kodeCO', 20);
-            $table->string('nama_akun', 30);
-            $table->string('asersi', 20);
+            $table->string('kodeCA', 20);
+            $table->boolean('desain'); //true = Ya , false = Tidak
+            $table->boolean('test'); //true = Ya , false = Tidak
+            $table->text('issue');
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('related_accounts');
+        Schema::dropIfExists('leadsheets');
     }
 };

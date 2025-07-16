@@ -3,13 +3,14 @@
 use App\Http\Controllers\BisCycController;
 use App\Http\Controllers\Co_actController;
 use App\Http\Controllers\Co_ObjController;
+use App\Http\Controllers\LeadsheetController;
+use App\Http\Controllers\PrototypeWPController;
 use App\Http\Controllers\RelatedAccountController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\TipeIndustriController;
-use App\Models\TipeIndustri;
+use App\Models\Leadsheet;
 use Illuminate\Support\Facades\Route;
 
-use function Ramsey\Uuid\v1;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,10 +34,7 @@ Route::post('/risk/{id}', [RiskController::class, 'store']);
 
 Route::post('/reaccount/{id}', [RelatedAccountController::class, 'store']);
 
-Route::get('/tes/biscyc', function(){
-    $tes = TipeIndustri::with(
-            'bisCycs.co_objs.co_acts.risks'
-            )
-            ->where('id',1 )->get();
-    dd($tes);
-});
+// Route::get('/prototypeWP', [PrototypeWPController::class, 'leadsheet']);
+// Route::get('/prototypeWP-understanding/{kodeCA}', [PrototypeWPController::class, 'understanding']);
+
+Route::get('/leadsheet-understanding', [LeadsheetController::class, 'index']);
