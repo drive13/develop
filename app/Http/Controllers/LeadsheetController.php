@@ -16,16 +16,19 @@ class LeadsheetController extends Controller
         
         $kodes = TipeIndustri::with(
             'bisCycs.co_objs.co_acts.risks',
-            )->get();
+        )->get();
         
-            $controls = TipeIndustri::with(
+        $controls = TipeIndustri::with(
             'bisCycs.co_objs.re_accounts',
             'bisCycs.co_objs.co_acts.risks',
-            )->where('kodeIndustri', 'ITGC')->get();
-
+        )->where('kodeIndustri', 'ITGC')->get();
+        
+        $ls = Leadsheet::where('kodeLeadsheet', 'BCE25-U001')->orderBy('kodeCO', 'asc')->get();
+        // dd($ls);
         return view('leadsheet-wp', [
-            'c' => $controls,
+            'controls' => $controls,
             'tis' => $kodes,
+            'ls' => $ls,
         ]);
     }
 
@@ -66,7 +69,7 @@ class LeadsheetController extends Controller
      */
     public function update(Request $request, Leadsheet $leadsheet)
     {
-        //
+        return 'belum jadi :v';
     }
 
     /**

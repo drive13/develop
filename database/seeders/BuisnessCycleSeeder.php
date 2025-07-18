@@ -27,6 +27,24 @@ class BuisnessCycleSeeder extends Seeder
             'namaBisCyc' => 'Premium',
         ]);
         
+        BuisnessCycle::create([
+            'kodeIndustri' => 'ITGC',
+            'kodeBisCyc' => 'MC',
+            'namaBisCyc' => 'Manage Change',
+        ]);
+        
+        BuisnessCycle::create([
+            'kodeIndustri' => 'ITGC',
+            'kodeBisCyc' => 'MA',
+            'namaBisCyc' => 'Manage Access',
+        ]);
+        
+        BuisnessCycle::create([
+            'kodeIndustri' => 'ITGC',
+            'kodeBisCyc' => 'MO',
+            'namaBisCyc' => 'Manage Operation',
+        ]);
+        
 
     }
 }

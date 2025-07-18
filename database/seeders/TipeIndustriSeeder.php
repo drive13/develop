@@ -17,5 +17,10 @@ class TipeIndustriSeeder extends Seeder
             'nama' => 'Manufaktur',
         ]);
         
+        TipeIndustri::create([
+            'kodeIndustri' => 'ITGC',
+            'nama' => 'IT General Control',
+        ]);
+        
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Co_Act;
+use App\Models\Leadsheet;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,6 +30,82 @@ class CoActSeeder extends Seeder
             'description' => 'In some batch-oriented application systems, on-line edit and validation routines are limited, especially in older applications.  With these applications, it is necessary to compare order entry data to source documents manually to ensure the accuracy of data input.  Such a procedure may be unnecessary in many modern application systems, which perform more rigorous data edit and validation and/or confirm purchase order details with suppliers and requisition data.  However, it may remain appropriate in certain cases; for example, if individual purchase orders are large and complex and not readily subject to automated editing and validation. In order for this control to be most effective, the person comparing the purchase order entry data to source documents should not be the one who originally entered the purchase orders.  This kind of control is often achieved through peer-to-peer or supervisory review.',
             'test_of_control' => 'tesnya EX213. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim odio in necessitatibus, dolor amet ex a commodi temporibus! Necessitatibus corrupti natus, ratione placeat molestias asperiores facere incidunt rem doloribus maiores, ab alias est expedita odio iusto eaque rerum! Sequi fugit eius molestiae et obcaecati nisi eligendi praesentium optio in sint laboriosam voluptatem dicta doloribus ex perferendis ipsum, illo non adipisci saepe aperiam ipsam quaerat itaque debitis! Consequuntur accusantium qui doloremque debitis eveniet quo, similique laudantium culpa quisquam amet magnam molestias sint labore pariatur ea corrupti reprehenderit nulla, quasi, in voluptates nisi dolorum. Exercitationem ipsa repellat tenetur natus veniam et culpa.',
             'nature' => 'Added Value',
+        ]);
+        
+        Co_Act::create([
+            'kodeCO' => 'MO01', 
+            'kodeCA' => 'MO0101',
+            'control_act' => 'lorem amet Purchase order entry data is compared to source documents by individuals who are independent of the purchase order entry process.',
+            'description' => 'In some batch-oriented application systems, on-line edit and validation routines are limited, especially in older applications.  With these applications, it is necessary to compare order entry data to source documents manually to ensure the accuracy of data input.  Such a procedure may be unnecessary in many modern application systems, which perform more rigorous data edit and validation and/or confirm purchase order details with suppliers and requisition data.  However, it may remain appropriate in certain cases; for example, if individual purchase orders are large and complex and not readily subject to automated editing and validation. In order for this control to be most effective, the person comparing the purchase order entry data to source documents should not be the one who originally entered the purchase orders.  This kind of control is often achieved through peer-to-peer or supervisory review.',
+            'test_of_control' => 'ya itu',
+            'nature' => 'Key Audit',
+        ]);
+        
+        Co_Act::create([
+            'kodeCO' => 'MO01', 
+            'kodeCA' => 'MO0102',
+            'control_act' => 'lorem lorem Purchase order entry data is compared to source documents by individuals who are independent of the purchase order entry process.',
+            'description' => 'In some batch-oriented application systems, on-line edit and validation routines are limited, especially in older applications.  With these applications, it is necessary to compare order entry data to source documents manually to ensure the accuracy of data input.  Such a procedure may be unnecessary in many modern application systems, which perform more rigorous data edit and validation and/or confirm purchase order details with suppliers and requisition data.  However, it may remain appropriate in certain cases; for example, if individual purchase orders are large and complex and not readily subject to automated editing and validation. In order for this control to be most effective, the person comparing the purchase order entry data to source documents should not be the one who originally entered the purchase orders.  This kind of control is often achieved through peer-to-peer or supervisory review.',
+            'test_of_control' => 'ya itu lagi',
+            'nature' => 'Key Audit',
+        ]);
+        
+        Co_Act::create([
+            'kodeCO' => 'MA01', 
+            'kodeCA' => 'MA0101',
+            'control_act' => 'lorem amet doler ipsum Purchase order entry data is compared to source documents by individuals who are independent of the purchase order entry process.',
+            'description' => 'In some batch-oriented application systems, on-line edit and validation routines are limited, especially in older applications.  With these applications, it is necessary to compare order entry data to source documents manually to ensure the accuracy of data input.  Such a procedure may be unnecessary in many modern application systems, which perform more rigorous data edit and validation and/or confirm purchase order details with suppliers and requisition data.  However, it may remain appropriate in certain cases; for example, if individual purchase orders are large and complex and not readily subject to automated editing and validation. In order for this control to be most effective, the person comparing the purchase order entry data to source documents should not be the one who originally entered the purchase orders.  This kind of control is often achieved through peer-to-peer or supervisory review.',
+            'test_of_control' => 'ya lagi ya lagi',
+            'nature' => 'Key Audit',
+        ]);
+        
+        Co_Act::create([
+            'kodeCO' => 'MA01', 
+            'kodeCA' => 'MA0102',
+            'control_act' => 'lorem ipsum doler amet Purchase order entry data is compared to source documents by individuals who are independent of the purchase order entry process.',
+            'description' => 'In some batch-oriented application systems, on-line edit and validation routines are limited, especially in older applications.  With these applications, it is necessary to compare order entry data to source documents manually to ensure the accuracy of data input.  Such a procedure may be unnecessary in many modern application systems, which perform more rigorous data edit and validation and/or confirm purchase order details with suppliers and requisition data.  However, it may remain appropriate in certain cases; for example, if individual purchase orders are large and complex and not readily subject to automated editing and validation. In order for this control to be most effective, the person comparing the purchase order entry data to source documents should not be the one who originally entered the purchase orders.  This kind of control is often achieved through peer-to-peer or supervisory review.',
+            'test_of_control' => 'ya lagi ya lagi llagi',
+            'nature' => 'Key Audit',
+        ]);
+
+        //numpang seeder leadsheet
+        Leadsheet::create([
+            'kodeLeadsheet' => 'BCE25-U001',
+            'kodeBisCyc' => 'MO',
+            'kodeCO' => 'MO01',
+            'kodeCA' => 'MO0101',
+            'desain' => Null,
+            'test' => Null,
+            'issue' => Null,
+        ]);
+        Leadsheet::create([
+            'kodeLeadsheet' => 'BCE25-U001',
+            'kodeBisCyc' => 'MO',
+            'kodeCO' => 'MO01',
+            'kodeCA' => 'MO0102',
+            'desain' => Null,
+            'test' => Null,
+            'issue' => Null,
+        ]);
+        
+        Leadsheet::create([
+            'kodeLeadsheet' => 'BCE25-U001',
+            'kodeBisCyc' => 'MA',
+            'kodeCO' => 'MA01',
+            'kodeCA' => 'MA0101',
+            'desain' => Null,
+            'test' => Null,
+            'issue' => Null,
+        ]);
+        
+        Leadsheet::create([
+            'kodeLeadsheet' => 'BCE25-U001',
+            'kodeBisCyc' => 'MA',
+            'kodeCO' => 'MA01',
+            'kodeCA' => 'MA0102',
+            'desain' => Null,
+            'test' => Null,
+            'issue' => Null,
         ]);
     }
 }

@@ -47,5 +47,20 @@ class CoObjSeeder extends Seeder
             'description' =>'-',
         ]);
         
+        Co_Obj::create([
+            'kodeBisCyc' => 'MO',
+            'kodeCO' => 'MO01',
+            'control_obj' => 'lorem ipsum doler amet Manage Operation',
+            'description' =>'-',
+        ]);
+        
+        Co_Obj::create([
+            'kodeBisCyc' => 'MA',
+            'kodeCO' => 'MA01',
+            'control_obj' => 'lorem ipsum doler amet Manage Access',
+            'description' =>'-',
+        ]);
+        
+        
     }
 }

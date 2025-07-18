@@ -8,6 +8,7 @@ class UnderstandingCA extends Model
 {
     protected $fillable = [
         'kodeLeadsheet',
+        'kodeCA',
         'kodeActivityCA',
         'activityCA',
         'sop',
@@ -17,7 +18,7 @@ class UnderstandingCA extends Model
     ];
 
     protected $casts = [
-        'attachments',
+        'attachments' => 'array',
     ];
 
     public function ls()

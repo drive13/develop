@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('leadsheets', function (Blueprint $table) {
             $table->id();
-            $table->string('kodeLeadsheet', 50)->unique();
+            $table->string('kodeLeadsheet', 50); //gk bisa uniq
             $table->string('kodeBisCyc', 20);
             $table->string('kodeCO', 20);
             $table->string('kodeCA', 20);
-            $table->boolean('desain'); //true = Ya , false = Tidak
-            $table->boolean('test'); //true = Ya , false = Tidak
-            $table->text('issue');
+            $table->boolean('desain')->nullable(); //true = Ya , false = Tidak
+            $table->boolean('test')->nullable(); //true = Ya , false = Tidak
+            $table->text('issue')->nullable();
             $table->timestamps();
         });
     }

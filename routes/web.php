@@ -8,7 +8,9 @@ use App\Http\Controllers\PrototypeWPController;
 use App\Http\Controllers\RelatedAccountController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\TipeIndustriController;
+use App\Http\Controllers\UnderstandingCAController;
 use App\Models\Leadsheet;
+use App\Models\UnderstandingCA;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,4 +39,9 @@ Route::post('/reaccount/{id}', [RelatedAccountController::class, 'store']);
 // Route::get('/prototypeWP', [PrototypeWPController::class, 'leadsheet']);
 // Route::get('/prototypeWP-understanding/{kodeCA}', [PrototypeWPController::class, 'understanding']);
 
-Route::get('/leadsheet-understanding', [LeadsheetController::class, 'index']);
+Route::get('/leadsheet-understanding', [LeadsheetController::class, 'index']); //rutenya nanti harusnya per klient/penugasan
+Route::post('/leadsheet/update', [LeadsheetController::class, 'update']);
+
+Route::get('/understanding/{param}', [UnderstandingCAController::class, 'edit']);
+Route::post('/understandingCA/create', [UnderstandingCAController::class, 'store']);
+Route::post('/understanding/update', [UnderstandingCAController::class, 'update']);

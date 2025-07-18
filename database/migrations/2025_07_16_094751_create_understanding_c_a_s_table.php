@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('understanding_c_a_s', function (Blueprint $table) {
             $table->id();
             $table->string('kodeLeadsheet', 50);
+            $table->string('kodeCA', 20);
             $table->string('kodeActivityCA', 30)->unique();
             $table->text('activityCA');
-            $table->boolean('sop'); //
-            $table->boolean('dijalankan'); //
-            $table->text('penjelasanActivity');
-            $table->json('attachments');
+            $table->boolean('sop')->nullable(); //
+            $table->boolean('dijalankan')->nullable(); //
+            $table->text('penjelasanActivity')->nullable();
+            $table->json('attachments')->nullable();
             $table->timestamps();
         });
     }
