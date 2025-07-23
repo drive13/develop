@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class UnderstandingCA extends Model
 {
     protected $fillable = [
-        'kodeLeadsheet',
-        'kodeCA',
-        'kodeActivityCA',
-        'activityCA',
+        'kodeLeadsheet', // dari leadsheet
+        'kodeCA', // dari CA
+        'kodeActivityCA', // nomor kriteria per CA
+        'activityCA', // deskripsi kriteria
         'sop',
         'dijalankan',
         'penjelasanActivity',

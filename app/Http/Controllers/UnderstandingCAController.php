@@ -8,6 +8,7 @@ use App\Models\TipeIndustri;
 use App\Models\UnderstandingCA;
 use Illuminate\Http\Request;
 use League\Uri\Encoder;
+use PhpParser\Node\Expr\Cast\String_;
 
 class UnderstandingCAController extends Controller
 {
@@ -86,10 +87,12 @@ class UnderstandingCAController extends Controller
          * 4. OK
         */
         $hasil = explode("&&", $param);
+
         $ca = Co_Act::with(
             'co_obj.bisCyc.tipeIndustri',
             'risks',
         )->where('kodeCA', $hasil[2])->first();
+
         $kodes = TipeIndustri::with(
             'bisCycs.co_objs.co_acts.risks',
             )->where('kodeIndustri', 'ITGC')->get(); // nanti harusnya query per klient + penugasan + wp itgc
@@ -98,11 +101,13 @@ class UnderstandingCAController extends Controller
         $activityCA = UnderstandingCA::where('kodeLeadsheet', $hasil[0])
             ->where('kodeCA', $hasil[2])
             ->get();
-
+        
+        // dd($activityCA[13]);
+        
         return view('understanding-wp', [
             'tis' => $kodes,
             'ca' => $ca,
-            'klspca' => $hasil[0].'/'.$hasil[2], //kode leadsheet per ca
+            'klspca' => $hasil[0].'&&'.$hasil[2], //kode leadsheet per ca
             'aCA' => $activityCA,
         ]);
     }
@@ -110,39 +115,79 @@ class UnderstandingCAController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UnderstandingCA $understandingCA)
+    public function update(Request $request, String $klscpa)
     {
+        // dd($request);
+        /**
+         * Params
+         */
+        $explode = explode('&&', $klscpa);
+        $kodeCA = $explode[1];
+        $kodeLeadsheet = $explode[0];
         $fileAttachments = [];
+        
+        /**
+         * validasi
+         */
         $request->validate([
-            'kodeActivityCA' => 'required|string',
-            'activityCA' => 'required|string',
-            'dijalankan' => 'required|boolean',
-            'sop' => 'required|boolean',
-            'penjelasanActivity' => 'required|string',
-            'attachments.*' => 'file|mimes:jpg,gif,jpeg,png,pdf,doc,docx,xlx,xlsx|max:30720', // max 2MB
+            // 'kodeActivityCA' => 'required|string',
+            'activityCA' => 'array',
+            'activityCA.*' => 'required|string',
+            'dijalankan' => 'array',
+            'dijalankan.*' => 'boolean|nullable',
+            'sop' => 'array',
+            'sop.*' => 'nullable|boolean',
+            'penjelasanActivity' => 'array',
+            'penjelasanActivity.*' => 'nullable|string',
+            'attachments' => 'array|nullable', // 
+            'attachments.*' => 'array|nullable', // 
+            'attachments.*.*' => 'file|mimes:jpg,gif,jpeg,png,pdf,doc,docx,xlx,xlsx|max:30720', //
         ]);
 
-        if ($request->hasFile('attachments')) {
-            foreach ($request->file('attachments') as $file) {
-                $filename = time() . '_' . $file->getClientOriginalName(); //nanti sesuaikan dengan kode klien
-                $file->storeAs('uploads', $filename, 'public');
-                $fileAttachments[] = $filename;
+        /**
+         * handle attachment files before update
+         */
+        if ($request->file('attachments')) {
+            // dd('harusnya gk kena, karena gk ada file');
+            foreach ($request->file('attachments') as $index => $files) {
+                foreach ($files as $file) {
+                    $filename = uniqid() . '_' . $file->getClientOriginalName();
+                    $file->storeAs('uploads', $filename, 'public');
+                    $fileAttachments[$index][] = $filename;
+                }
             }
-        } else {
-            $u = UnderstandingCA::where('kodeActivityCA', $request->kodeActivityCA)->first();
-            $fileAttachments = $u->attachments ?? [];
         }
 
-        UnderstandingCA::where('kodeActivityCA', $request->kodeActivityCA)->update([
-            'kodeActivityCA' => $request->kodeActivityCA,
-            'activityCA' => $request->activityCA,
-            'dijalankan' => $request->dijalankan,
-            'sop' => $request->sop,
-            'penjelasanActivity' => $request->penjelasanActivity,
-            'attachments' => $fileAttachments,
-        ]);
+        // Merge file lama dan baru // harusnya di akhir sebelum save update
+        foreach ($fileAttachments as $index => $newFiles) { 
+            $existing = UnderstandingCA::where('kodeActivityCA', $request->kodeActivityCA[$index])->first();
+            $existingAttachments = $existing?->attachments ?? [];
+            // dd($existingAttachments, $newFiles);
+            $newFiles = $fileAttachments[$index] ?? [];
+            $fileAttachments[$index] = array_merge($existingAttachments, $newFiles);
+        }
 
-        return back();
+        // dd($fileAttachments, $request);
+        
+        /**
+         * Update or create each itaration
+        */
+        // dd($request, $fileAttachments);
+        foreach($request->activityCA as $i => $ac){ 
+            UnderstandingCA::updateOrCreate(
+                ['kodeActivityCA' => $request->kodeActivityCA[$i]],
+                [
+                    // 'kodeActivityCA' => $request->kodeActivityCA[$i],
+                    'kodeLeadsheet' => $kodeLeadsheet,
+                    'kodeCA' => $kodeCA,
+                    'activityCA' => $request->activityCA[$i],
+                    'dijalankan' => $request->dijalankan[$i] ?? null,
+                    'sop' => $request->sop[$i] ?? null,
+                    'penjelasanActivity' => $request->penjelasanActivity[$i] ?? null,
+                    'attachments' => $fileAttachments[$i] ?? null,
+                ]);
+        }
+        return back()->with('success', 'Data telah di update!');
 
     }
 

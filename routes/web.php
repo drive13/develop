@@ -11,6 +11,7 @@ use App\Http\Controllers\TipeIndustriController;
 use App\Http\Controllers\UnderstandingCAController;
 use App\Models\Leadsheet;
 use App\Models\UnderstandingCA;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,4 +45,21 @@ Route::post('/leadsheet/update', [LeadsheetController::class, 'update']);
 
 Route::get('/understanding/{param}', [UnderstandingCAController::class, 'edit']);
 Route::post('/understandingCA/create', [UnderstandingCAController::class, 'store']);
-Route::post('/understanding/update', [UnderstandingCAController::class, 'update']);
+Route::post('/understanding/update-ca/{klscpa}', [UnderstandingCAController::class, 'update']);
+
+/**
+ * Tes simpan file
+ */
+Route::get('/form-file', function(){
+    return view('tes');
+});
+
+Route::post('/terima', function(Request $request){
+    
+    if ($request->hasFile('file')) {
+        $filename = $request->keterangan . '--' . $request->file('file')->getClientOriginalName();
+        $request->file('file')->storeAs('uploads', $filename, 'public');
+        return 'File tersimpan';
+    } 
+
+});
